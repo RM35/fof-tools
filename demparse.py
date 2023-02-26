@@ -44,6 +44,7 @@ class Frametype(Enum):
 
 with open("big.dem", "rb") as f: demo = f.read()
 bq = deque(demo)
+total_size = len(bq)
 
 title = unp_str(next_n_bytes(8, bq))
 demo_protocol = unp_int(next_n_bytes(4, bq))
@@ -63,16 +64,17 @@ output = []
 
 while len(bq) > 0:
     f_type = Frametype(unp_uchar(next_n_bytes(1, bq)))
-    print(F"{f_type=}")
+    print(F"{f_type=}\nAt byte: {total_size - (len(bq)-1)}")
     tick = unp_int(next_n_bytes(4, bq))
     match f_type:
         case Frametype.PACKET:
-            server_tick = unp_int(next_n_bytes(4, bq))
-            client_tick = unp_int(next_n_bytes(4, bq))
+            next_n_bytes(4, bq)
             x = unp_float(next_n_bytes(4, bq))
             y = unp_float(next_n_bytes(4, bq))
             z = unp_float(next_n_bytes(4, bq))
-            next_n_bytes(40, bq)
+            next_n_bytes(44, bq)
+            size = unp_int(next_n_bytes(4, bq))
+            next_n_bytes(size, bq)
             output.append(F"{tick}: {x} {y} {z}")
         case Frametype.SYNCTICK:
             pass
