@@ -8,7 +8,7 @@ death = compile(r'killed ' + username)
 connected = compile(username + r' connected')
 end_map = compile(r'END MAP STATS')
 close_game = compile(r'^Host_WriteConfiguration')
-weapon = compile(r'with (\w+)\.')
+weapon = compile(r'with (.*)\.')
 victim = compile(r'killed (.*) with \w+\.')
 killer = compile(r'^(.*) killed')
 
