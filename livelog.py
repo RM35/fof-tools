@@ -42,7 +42,7 @@ def parse_end(line):
     print(out)
     return out
 
-with open(logpath, mode='r', buffering=1, encoding='utf-8') as f,\
+with open(logpath, mode='r', buffering=1, encoding='utf-8', errors='replace') as f,\
      open(outpath, mode='a', buffering=1, encoding='utf-8') as fo:
     f.seek(0, 2)
     while True:
