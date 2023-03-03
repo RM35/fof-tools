@@ -9,7 +9,7 @@ connected = compile(username + r' connected')
 end_map = compile(r'END MAP STATS')
 close_game = compile(r'^Host_WriteConfiguration')
 weapon = compile(r'with (.*)\.')
-victim = compile(r'killed (.*) with \w+\.')
+victim = compile(r'killed (.*) with .*\.')
 killer = compile(r'^(.*) killed')
 
 def parse_kill(line):
